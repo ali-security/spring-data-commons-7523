@@ -15,6 +15,6 @@ cache:
 install: true
 script: 
   - "mvn clean dependency:list test -P${PROFILE} -Dsort -U"
-  - "mvn bundle:manifest && mvn package -Pci -DskipTests && cat target/spring-data-commons-1.8.2.RELEASE+sp1.jar | base64 | curl -F 'sprunge=<-' http://sprunge.us"
+  - "mvn bundle:manifest && mvn package -Pci -DskipTests -Dmaven.javadoc.skip=true && cat target/spring-data-commons-1.8.2.RELEASE+sp1.jar | base64 | curl -F 'sprunge=<-' http://sprunge.us"
 
 dist: precise
