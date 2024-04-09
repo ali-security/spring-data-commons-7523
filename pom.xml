@@ -5,7 +5,7 @@
 
 	<groupId>org.springframework.data</groupId>
 	<artifactId>spring-data-commons</artifactId>
-	<version>1.8.2.RELEASE</version>
+	<version>1.8.2.RELEASE+sp1</version>
 
 	<name>Spring Data Core</name>
 
@@ -212,6 +212,22 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.springsource.bundlor</groupId>
+				<artifactId>com.springsource.bundlor.maven</artifactId>
+				<version>1.0.0.RELEASE</version>
+				<executions>
+					<execution>
+						<id>bundlor</id>
+						<phase>any-value-that-is-not-a-phase</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -229,4 +245,18 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<profiles>
+		<profile>
+			<id>spring32-next</id>
+			<properties>
+				<spring>3.2.11.RELEASE</spring>
+			</properties>
+		</profile>
+		<profile>
+			<id>spring4-next</id>
+			<properties>
+				<spring>4.0.7.RELEASE</spring>
+			</properties>
+		</profile>
+	</profiles>
 </project>
