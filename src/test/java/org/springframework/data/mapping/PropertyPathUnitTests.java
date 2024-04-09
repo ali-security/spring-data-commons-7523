@@ -373,6 +373,24 @@ public class PropertyPathUnitTests {
 		from("userFooName", Bar.class);
 	}
 
+	@Test // DATACMNS-1285
+	public void rejectsTooLongPath() {
+
+		String source = "foo.bar";
+
+		for (int i = 0; i < 9; i++) {
+			source = source + "." + source;
+		}
+
+		assertThat(source.split("\\.").length, is(greaterThan(1000)));
+
+		final String path = source;
+
+		exception.expect(IllegalArgumentException.class);
+
+		PropertyPath.from(path, Left.class);
+	}
+
 	private class Foo {
 
 		String userName;
@@ -405,5 +423,15 @@ public class PropertyPathUnitTests {
 		private String userNameWhatever;
 		private FooBar user;
 		private Foo _foo;
+	}
+
+	// DATACMNS-1285
+
+	private class Left {
+		Right foo;
+	}
+
+	private class Right {
+		Left bar;
 	}
 }
